@@ -18,7 +18,7 @@ const UserDetails = () => {
   const [filePreview, setFilePreview] = useState(null);
   const [messages, setMessages] = useState([]);
   const [roomId, setRoomId] = useState("");
-  const socket = io("https://my-social-media-v6xp.onrender.com", {
+  const socket = io("my-social-media-v6xp.onrender.com", {
     reconnectionAttempts: 5,
     reconnectionDelay: 1000,
     timeout: 5000,
