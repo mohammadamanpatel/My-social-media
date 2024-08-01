@@ -33,6 +33,7 @@ const io = new Server(server, {
  cors: {
     origin: ["https://my-social-media-v6xp.onrender.com"],
     methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 
