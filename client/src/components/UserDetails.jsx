@@ -19,11 +19,10 @@ const UserDetails = () => {
   const [messages, setMessages] = useState([]);
   const [roomId, setRoomId] = useState("");
   const socket = io("https://my-social-media-v6xp.onrender.com", {
-  reconnectionAttempts: 5,
-  reconnectionDelay: 1000,
-  timeout: 5000,
-});
-
+    reconnectionAttempts: 5,
+    reconnectionDelay: 1000,
+    timeout: 5000,
+  });
 
   socket.on("connect", () => {
     console.log("Connected to server");
@@ -54,59 +53,63 @@ const UserDetails = () => {
   });
 
   useEffect(() => {
-  const fetchUserDetails = async () => {
-    try {
-      const response = await fetch(`/api/v1/user/${id}`);
-      if (!response.ok) {
-        console.error("Network response was not ok");
-        return;
+    const fetchUserDetails = async () => {
+      try {
+        const response = await fetch(`/api/v1/user/${id}`);
+        if (!response.ok) {
+          console.error("Network response was not ok");
+          return;
+        }
+        const userData = await response.json();
+        setUserDetails(userData);
+
+        // Determine the correct roomId
+        let newRoomId = "";
+        if (currentUser._id < userData._id) {
+          newRoomId = `${currentUser._id}-${userData._id}`;
+        } else {
+          newRoomId = `${userData._id}-${currentUser._id}`;
+        }
+        setRoomId(newRoomId);
+      } catch (error) {
+        console.error("Error fetching user details:", error);
       }
-      const userData = await response.json();
-      setUserDetails(userData);
+    };
 
-      let newRoomId = currentUser._id < userData._id
-        ? `${currentUser._id}-${userData._id}`
-        : `${userData._id}-${currentUser._id}`;
-      setRoomId(newRoomId);
-    } catch (error) {
-      console.error("Error fetching user details:", error);
-    }
-  };
+    fetchUserDetails();
+    socket.emit("connectUser", id);
 
-  fetchUserDetails();
-  socket.emit("connectUser", id);
+    return () => {
+      socket.disconnect();
+    };
+  }, [id, currentUser._id, socket]);
 
-  return () => {
-    socket.disconnect();
-  };
-}, [id, currentUser._id]);
-
-useEffect(() => {
-  if (!roomId) return;
-
-  const fetchMessages = async () => {
-    try {
-      const response = await fetch(`/api/v1/message/messages?roomId=${roomId}&me=${currentUser._id}&id=${id}`);
-      if (!response.ok) {
-        console.error("Network response was not ok");
-        return;
+  useEffect(() => {
+    const fetchMessages = async () => {
+      if (!roomId) return;
+      try {
+        const response = await fetch(
+          `/api/v1/message/messages?roomId=${roomId}&me=${currentUser._id}&id=${id}`
+        );
+        if (!response.ok) {
+          console.error("Network response was not ok");
+          return;
+        }
+        const messageData = await response.json();
+        setMessages(messageData);
+      } catch (error) {
+        console.error("Error fetching messages:", error);
       }
-      const messageData = await response.json();
-      setMessages(messageData);
-    } catch (error) {
-      console.error("Error fetching messages:", error);
-    }
-  };
+    };
 
-  fetchMessages();
-}, [roomId, id, currentUser._id,messages]);
-
+    fetchMessages();
+  }, [messages]);
 
   useEffect(() => {
     socket.on("newMessage", (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
     });
-  }, [socket,messages]);
+  }, [socket]);
 
   const handleMessageSend = async (e) => {
     e.preventDefault();
