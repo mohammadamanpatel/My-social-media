@@ -103,7 +103,7 @@ const UserDetails = () => {
     };
 
     fetchMessages();
-  }, [messages]);
+  }, [roomId, id,currentUser._id,messages]);
 
   useEffect(() => {
     socket.on("newMessage", (message) => {
