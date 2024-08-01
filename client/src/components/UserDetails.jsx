@@ -22,7 +22,7 @@ const UserDetails = () => {
   reconnectionAttempts: 5,
   reconnectionDelay: 1000,
   timeout: 5000,
-  transports: ["websocket", "polling"], 
+  transports: ["websocket"], 
 });
 
 
