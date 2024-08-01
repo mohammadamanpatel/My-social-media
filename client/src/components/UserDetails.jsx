@@ -20,36 +20,8 @@ const UserDetails = () => {
   const [roomId, setRoomId] = useState("");
   const socket = io("https://my-social-media-v6xp.onrender.com", {
     transports: ['websocket', 'polling'],
-  reconnectionAttempts: 5,
-  reconnectionDelay: 1000,
-  });
-
-  socket.on("connect", () => {
-    console.log("Connected to server");
-  });
-
-  socket.on("disconnect", (reason) => {
-    console.log("Disconnected:", reason);
-    if (reason === "io server disconnect") {
-      // The disconnection was initiated by the server, you need to reconnect manually
-      socket.connect();
-    }
-  });
-
-  socket.on("connect_error", (err) => {
-    console.error("Connection error:", err.message);
-  });
-
-  socket.on("reconnect_attempt", (attemptNumber) => {
-    console.log(`Reconnection attempt ${attemptNumber}`);
-  });
-
-  socket.on("reconnect", (attemptNumber) => {
-    console.log(`Reconnected after ${attemptNumber} attempts`);
-  });
-
-  socket.on("reconnect_failed", () => {
-    console.error("Reconnection failed");
+    reconnectionAttempts: 5,
+    reconnectionDelay: 1000,
   });
 
   useEffect(() => {
@@ -63,7 +35,6 @@ const UserDetails = () => {
         const userData = await response.json();
         setUserDetails(userData);
 
-        // Determine the correct roomId
         let newRoomId = "";
         if (currentUser._id < userData._id) {
           newRoomId = `${currentUser._id}-${userData._id}`;
@@ -82,7 +53,7 @@ const UserDetails = () => {
     return () => {
       socket.disconnect();
     };
-  }, [id, currentUser._id, socket]);
+  }, [id, currentUser._id]);
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -103,7 +74,7 @@ const UserDetails = () => {
     };
 
     fetchMessages();
-  }, [roomId, id,currentUser._id,messages]);
+  }, [roomId, id, currentUser._id,messages]);
 
   useEffect(() => {
     socket.on("newMessage", (message) => {
@@ -141,6 +112,7 @@ const UserDetails = () => {
       socket.emit("sendMessage", newMessage);
 
       setMessages((prevMessages) => [...prevMessages, newMessage]);
+
       setMessageText("");
       setFile(null);
       setFilePreview(null);
