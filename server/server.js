@@ -19,6 +19,7 @@ import uploadImageToCloudinary from "./utils/uploadImageToCloudinary.js";
 import uploadVideoToCloudinary from "./utils/uploadVideoToCloudinary.js";
 import upload from "./utils/uploadByMulter.js";
 import path from "path";
+
 const __dirname = path.resolve();
 config(); // Load environment variables from .env file
 cloudinary.config({
@@ -30,7 +31,7 @@ cloudinary.config({
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
- cors: {
+  cors: {
     origin: ["https://my-social-media-v6xp.onrender.com"],
     methods: ["GET", "POST"],
     credentials: true,
@@ -43,34 +44,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors());
 
+// Static files
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
 // Database connection
-
 DBConnection();
-app.use("/ping", (req, res) => {
-  res.send("hello world");
-});
-
-// Start server
-const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => {
-  console.log("Database connected");
-  console.log(`Server running on port ${PORT}`);
-});
 
 // Routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/post", postRoutes);
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/story", storyRoutes);
-app.use(express.static(path.join(__dirname, '/client/dist')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-});
-app.all("*", (req, res) => {
-  res.status(404).send("OOPS 404 Page not Found");
-});
-let savedMessage = {};
 
 app.post(
   "/api/v1/message",
@@ -156,6 +140,16 @@ app.get("/api/v1/message/messages", async (req, res) => {
   }
 });
 
+// Catch-all route for frontend
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
+
+// Catch-all for 404 errors
+app.all("*", (req, res) => {
+  res.status(404).send("OOPS 404 Page not Found");
+});
+
 // Socket.io connection handling
 const users = {};
 
@@ -207,4 +201,10 @@ io.on("connection", (socket) => {
   socket.on("reconnect_failed", () => {
     console.error("Reconnection failed");
   });
+});
+
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => {
+  console.log("Database connected");
+  console.log(`Server running on port ${PORT}`);
 });
