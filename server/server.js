@@ -29,8 +29,9 @@ cloudinary.config({
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
-  cors: {
-    origin: "*", // Update with your frontend URL or specific origin
+ cors: {
+    origin: "https://my-social-media-v6xp.onrender.com",
+    methods: ["GET", "POST"],
   },
 });
 
