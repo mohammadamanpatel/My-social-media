@@ -65,6 +65,9 @@ app.use(express.static(path.join(__dirname, '/client/dist')));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 });
+app.all("*", (req, res) => {
+  res.status(404).send("OOPS 404 Page not Found");
+});
 let savedMessage = {};
 
 app.post(
