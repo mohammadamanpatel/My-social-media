@@ -18,7 +18,8 @@ import {
 import uploadImageToCloudinary from "./utils/uploadImageToCloudinary.js";
 import uploadVideoToCloudinary from "./utils/uploadVideoToCloudinary.js";
 import upload from "./utils/uploadByMulter.js";
-
+import path from "path";
+const __dirname = path.resolve();
 config(); // Load environment variables from .env file
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -59,7 +60,11 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/post", postRoutes);
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/story", storyRoutes);
+app.use(express.static(path.join(__dirname, '/client/dist')));
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
 let savedMessage = {};
 
 app.post(
