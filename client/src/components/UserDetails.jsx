@@ -99,14 +99,14 @@ useEffect(() => {
   };
 
   fetchMessages();
-}, [roomId, id, currentUser._id]);
+}, [roomId, id, currentUser._id,messages]);
 
 
   useEffect(() => {
     socket.on("newMessage", (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
     });
-  }, [socket]);
+  }, [socket,messages]);
 
   const handleMessageSend = async (e) => {
     e.preventDefault();
