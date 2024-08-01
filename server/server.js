@@ -45,9 +45,10 @@ app.use(cors());
 // Database connection
 
 DBConnection();
-app.get('/', (req, res) => {
-  res.send('Welcome to the API');
+app.use("/ping", (req, res) => {
+  res.send("hello world");
 });
+
 // Start server
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
