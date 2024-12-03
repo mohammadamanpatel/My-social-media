@@ -50,7 +50,7 @@ const Header = () => {
             className="text-2xl font-bold text-gray-800 cursor-pointer"
             onClick={() => navigate("/")}
           >
-            FunFlow
+            Timeline Social
           </h1>
         </div>
         {currentUser && (
