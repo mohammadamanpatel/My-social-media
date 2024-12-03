@@ -6,7 +6,7 @@ import {
   signOutUserFailure,
   signOutUserStart,
   signOutUserSuccess,
-} from "../redux/user/userSlice";
+} from "../redux/user/userSlice.js";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -50,37 +50,40 @@ const Header = () => {
             className="text-2xl font-bold text-gray-800 cursor-pointer"
             onClick={() => navigate("/")}
           >
-            Timeline Social
+            FunFlow
           </h1>
         </div>
         {currentUser && (
-          <div className="flex items-center space-x-4 cursor-pointer">
-            <img
-              src={currentUser.avatar.secure_url}
-              alt={currentUser.username}
-              onClick={() => navigate(`/userProfile/${currentUser._id}`)}
-              className="hidden md:block w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover"
-            />
-            <input
-              type="text"
-              placeholder="Create Post"
-              onClick={() => navigate("/postCreate")}
-              className="hidden md:block border border-gray-300 rounded-full py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-32 sm:w-80" // Adjust width for different screens
-            />
-            <FaEnvelope
-            size={24}
-            className="text-gray-600 cursor-pointer transition duration-300 ease-in-out hover:text-gray-900"
-            onClick={() => navigate("/messages")}
-          />
-          </div>
-        <div className="flex items-center space-x-4">
-          <button
-            onClick={handleLogout}
-            className="bg-blue-500 text-white border-none py-2 px-4 text-base cursor-pointer rounded transition duration-300 ease-in-out hover:bg-blue-700"
-          >
-            Logout
-          </button>
-        </div>
+          <>
+            <div className="flex items-center space-x-4 cursor-pointer">
+              <img
+                src={currentUser.avatar.secure_url}
+                alt={currentUser.username}
+                onClick={() => navigate(`/userProfile/${currentUser._id}`)}
+                className="hidden md:block w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover"
+              />
+              <input
+                type="text"
+                placeholder="Create Post"
+                onClick={() => navigate("/postCreate")}
+                className="hidden md:block border border-gray-300 rounded-full py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-32 sm:w-80" // Adjust width for different screens
+              />
+            </div>
+            <div className="flex items-center space-x-4">
+              <FaEnvelope
+                size={24}
+                className="text-gray-600 cursor-pointer transition duration-300 ease-in-out hover:text-gray-900"
+                onClick={() => navigate("/messages")}
+              />
+              <button
+                onClick={handleLogout}
+                className="bg-blue-500 text-white border-none py-2 px-4 text-base cursor-pointer rounded transition duration-300 ease-in-out hover:bg-blue-700"
+              >
+                Logout
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </header>
   );
