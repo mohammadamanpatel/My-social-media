@@ -41,8 +41,8 @@ const Header = () => {
       <div className="w-11/12 max-w-6xl flex justify-between items-center">
         <div className="flex items-center">
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuWz5AqAhP0GkwkKFy8fs69BM1wH8NI8yiBw&s"
-            alt="FunFlow"
+            src="https://cdn.leonardo.ai/users/9a2817bf-ec11-4373-b4a0-d006ffd18472/generations/e3ab05fb-7a77-4a5a-879d-2d8d6b221fb5/Leonardo_Phoenix_Design_a_modern_sleek_logo_for_the_social_med_2.jpg"
+            alt="TimelineSocial"
             onClick={() => navigate("/")}
             className="h-10 w-10 mr-4 cursor-pointer"
           />
