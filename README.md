@@ -49,33 +49,34 @@
 
 ```plaintext  
 📦 Fun Flow Backend  
-├── controllers/  
-│   ├── auth.controller.js  
-│   ├── message.controller.js  
-│   ├── post.controller.js  
-│   ├── story.controller.js  
-│   └── user.controller.js  
-├── middlewares/  
-│   └── verifyToken.js  
-├── models/  
-│   ├── comment.model.js  
-│   ├── message.model.js  
-│   ├── post.model.js  
-│   ├── story.model.js  
-│   └── user.model.js  
-├── routes/  
-│   ├── auth.routes.js  
-│   ├── post.routes.js  
-│   ├── story.routes.js  
-│   └── user.routes.js  
-├── utils/  
-│   └── server.js  
-├── uploads/  
+├── server/  
+│   ├── controllers/  
+│   │   ├── auth.controller.js  
+│   │   ├── message.controller.js  
+│   │   ├── post.controller.js  
+│   │   ├── story.controller.js  
+│   │   └── user.controller.js  
+│   ├── middlewares/  
+│   │   └── verifyToken.js  
+│   ├── models/  
+│   │   ├── comment.model.js  
+│   │   ├── message.model.js  
+│   │   ├── post.model.js  
+│   │   ├── story.model.js  
+│   │   └── user.model.js  
+│   ├── routes/  
+│   │   ├── auth.routes.js  
+│   │   ├── post.routes.js  
+│   │   ├── story.routes.js  
+│   │   └── user.routes.js  
+│   ├── utils/  
+│   │   └── server.js  
+│   └── uploads/  
 ├── .env  
 ├── .gitignore  
 ├── package.json  
 ├── package-lock.json  
-└── README.md  
+└── README.md   
 ```  
 
 ---
