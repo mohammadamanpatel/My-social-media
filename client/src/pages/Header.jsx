@@ -67,14 +67,13 @@ const Header = () => {
               onClick={() => navigate("/postCreate")}
               className="hidden md:block border border-gray-300 rounded-full py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-32 sm:w-80" // Adjust width for different screens
             />
-          </div>
-        )}
-        <div className="flex items-center space-x-4">
-          <FaEnvelope
+            <FaEnvelope
             size={24}
             className="text-gray-600 cursor-pointer transition duration-300 ease-in-out hover:text-gray-900"
             onClick={() => navigate("/messages")}
           />
+          </div>
+        <div className="flex items-center space-x-4">
           <button
             onClick={handleLogout}
             className="bg-blue-500 text-white border-none py-2 px-4 text-base cursor-pointer rounded transition duration-300 ease-in-out hover:bg-blue-700"
