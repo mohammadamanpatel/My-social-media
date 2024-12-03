@@ -51,32 +51,33 @@
 📦 Fun Flow Backend  
 ├── server/  
 │   ├── controllers/  
-│   │   ├── auth.controller.js  
-│   │   ├── message.controller.js  
-│   │   ├── post.controller.js  
-│   │   ├── story.controller.js  
-│   │   └── user.controller.js  
+│   │   ├── auth.controller.js      # Handles user authentication logic  
+│   │   ├── message.controller.js   # Manages CRUD operations for messages  
+│   │   ├── post.controller.js      # Handles CRUD operations for posts  
+│   │   ├── story.controller.js     # Manages user stories functionality  
+│   │   └── user.controller.js      # Manages user-related functionalities  
 │   ├── middlewares/  
-│   │   └── verifyToken.js  
+│   │   └── verifyToken.js          # Middleware for JWT token verification  
 │   ├── models/  
-│   │   ├── comment.model.js  
-│   │   ├── message.model.js  
-│   │   ├── post.model.js  
-│   │   ├── story.model.js  
-│   │   └── user.model.js  
+│   │   ├── comment.model.js        # Schema for comments in the database  
+│   │   ├── message.model.js        # Schema for messages in the database  
+│   │   ├── post.model.js           # Schema for posts in the database  
+│   │   ├── story.model.js          # Schema for user stories in the database  
+│   │   └── user.model.js           # Schema for user details in the database  
 │   ├── routes/  
-│   │   ├── auth.routes.js  
-│   │   ├── post.routes.js  
-│   │   ├── story.routes.js  
-│   │   └── user.routes.js  
+│   │   ├── auth.routes.js          # API routes for authentication endpoints  
+│   │   ├── post.routes.js          # API routes for post-related endpoints  
+│   │   ├── story.routes.js         # API routes for story-related endpoints  
+│   │   └── user.routes.js          # API routes for user-related endpoints  
 │   ├── utils/  
-│   │   └── server.js  
-│   └── uploads/  
-├── .env  
-├── .gitignore  
-├── package.json  
-├── package-lock.json  
-└── README.md   
+│   │   └── server.js               # Utility file to configure and start the server  
+│   └── uploads/                    # Temporary directory to store uploaded files  
+├── .env                            # Environment variables for backend configuration  
+├── .gitignore                      # Git ignore rules for excluding files from version control  
+├── package.json                    # Dependency manager and scripts for the backend  
+├── package-lock.json               # Ensures consistent dependency versions  
+└── README.md                       # Documentation for setting up and using the backend  
+
 ```  
 
 ---
@@ -86,51 +87,51 @@
 ```plaintext  
 📦 client  
 ├── public/  
-│   ├── index.html  
+│   ├── index.html                  # HTML entry point for the app  
 ├── src/  
 │   ├── assets/  
-│   │   └── signup-logo.jpg  
+│   │   └── signup-logo.jpg         # Image asset for the signup page logo  
 │   ├── components/  
-│   │   ├── Allcomments.jsx  
-│   │   ├── CreatePost.jsx  
-│   │   ├── CreateStory.jsx  
-│   │   ├── DeletePost.jsx  
-│   │   ├── EditPost.jsx  
-│   │   ├── MessageComponent.jsx  
-│   │   ├── OAuth.jsx  
-│   │   ├── PostCard.jsx  
-│   │   ├── Search.jsx  
-│   │   ├── ShowAllPosts.jsx  
-│   │   ├── Stories.jsx  
-│   │   ├── UserDetails.jsx  
-│   │   ├── UserList.jsx  
+│   │   ├── Allcomments.jsx         # Displays all comments for a post  
+│   │   ├── CreatePost.jsx          # Component for creating a new post  
+│   │   ├── CreateStory.jsx         # Component for creating a new story  
+│   │   ├── DeletePost.jsx          # Handles post deletion functionality  
+│   │   ├── EditPost.jsx            # Allows editing an existing post  
+│   │   ├── MessageComponent.jsx    # Displays messages between users  
+│   │   ├── OAuth.jsx               # Handles OAuth integration for third-party login  
+│   │   ├── PostCard.jsx            # Displays an individual post in a card layout  
+│   │   ├── Search.jsx              # Implements search functionality for users or posts  
+│   │   ├── ShowAllPosts.jsx        # Displays a feed of all posts  
+│   │   ├── Stories.jsx             # Displays user stories  
+│   │   ├── UserDetails.jsx         # Displays detailed information about a user  
+│   │   ├── UserList.jsx            # Lists all users (e.g., followers/following)  
 │   ├── config/  
-│   │   └── axiosInstance.js  
+│   │   └── axiosInstance.js        # Configures Axios instance for making API requests  
 │   ├── pages/  
-│   │   ├── Footer.jsx  
-│   │   ├── Header.jsx  
-│   │   ├── Home.jsx  
-│   │   ├── Profile.jsx  
-│   │   ├── SignIn.jsx  
-│   │   ├── SignUp.jsx  
-│   │   └── UserProfile.jsx  
+│   │   ├── Footer.jsx              # Footer section of the app  
+│   │   ├── Header.jsx              # Header section of the app  
+│   │   ├── Home.jsx                # Home page displaying user feed  
+│   │   ├── Profile.jsx             # User profile page  
+│   │   ├── SignIn.jsx              # Component for signing in to the app  
+│   │   ├── SignUp.jsx              # Component for signing up for the app  
+│   │   └── UserProfile.jsx         # Displays profile information of another user  
 │   ├── redux/  
 │   │   └── user/  
-│   │       └── userSlice.js  
-│   │   └── store.js  
-│   ├── App.jsx  
-│   ├── ErrorBoundary.jsx  
-│   ├── firebase.js  
-│   ├── index.css  
-│   ├── main.jsx  
-├── .env  
-├── .eslintrc.cjs  
-├── .gitignore  
-├── postcss.config.js  
-├── tailwind.config.js  
-├── vite.config.js  
-├── package.json  
-└── README.md  
+│   │       └── userSlice.js        # Redux slice to manage user state  
+│   │   └── store.js                # Configures Redux store for state management  
+│   ├── App.jsx                     # Root component of the app  
+│   ├── ErrorBoundary.jsx           # Handles errors gracefully across the app  
+│   ├── firebase.js                 # Firebase configuration for the project  
+│   ├── index.css                   # Global CSS styles for the app  
+│   ├── main.jsx                    # Entry point of the React app  
+├── .env                            # Environment variables for frontend configuration  
+├── .eslintrc.cjs                   # ESLint configuration for coding standards  
+├── .gitignore                      # Git ignore rules for excluding files from version control  
+├── postcss.config.js               # PostCSS configuration for processing styles  
+├── tailwind.config.js              # Tailwind CSS configuration  
+├── vite.config.js                  # Vite configuration for bundling and development server  
+├── package.json                    # Dependency manager and scripts for the frontend  
+└── README.md                       # Documentation for setting up and using the frontend  
 ```  
 
 ---
